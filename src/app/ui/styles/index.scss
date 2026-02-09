@@ -1,3 +1,6 @@
+@use '@shared/assets/styles/variables.scss' as *;
+@use './reset.scss' as *;
+
 html {
 	scroll-behavior: smooth;
 	font-size: 16px;
@@ -6,4 +9,6 @@ html {
 body {
 	font-family: 'Inter', sans-serif;
 	font-weight: 400;
+	color: $color-black;
+	background: $color-white;
 }
