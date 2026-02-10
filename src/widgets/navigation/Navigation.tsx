@@ -1,25 +1,70 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import './Navigation.scss'
 
 import arrowIcon from '/src/shared/assets/icons/arrow.svg'
 import exitIcon from '/src/shared/assets/icons/exit.svg'
+import menuIcon from '/src/shared/assets/icons/menu.svg'
 import profileImage from '/src/shared/assets/images/profile.svg'
 
 const Navigation = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen)
+	}
+
+	const closeMenu = () => {
+		setIsMenuOpen(false)
+	}
+
 	return (
 		<nav className='navigation container-1840'>
-			<ul className='navigation__menu'>
-				{/* Предполагаю, что должен быть логотип */}
+			{/* Бургер меню для мобильной версии */}
+			{!isMenuOpen && (
+				<button
+					className='navigation__burger'
+					onClick={toggleMenu}
+					aria-label='Открыть меню'
+				>
+					<img src={menuIcon} alt='Меню' />
+				</button>
+			)}
+
+			{/* Затемнение фона при открытом меню */}
+			{isMenuOpen && (
+				<div className='navigation__overlay' onClick={closeMenu} />
+			)}
+
+			{/* Основное меню */}
+			<ul
+				className={`navigation__menu ${isMenuOpen ? 'navigation__menu--open' : ''}`}
+			>
+				{/* Предполагаю что должен быть логотип */}
 				<li>
-					<Link to='/' className='navigation__menu__logo'></Link>
+					<Link to='/' onClick={closeMenu}>
+						<div className='navigation__menu__logo'></div>
+					</Link>
 				</li>
 
 				<li>
-					<Link to='/requests'>Заявки</Link>
+					<NavLink
+						to='/requests'
+						onClick={closeMenu}
+						className={({ isActive }) => (isActive ? 'active-link' : '')}
+					>
+						Заявки
+					</NavLink>
 				</li>
 
 				<li>
-					<Link to='/reports'>Отчеты</Link>
+					<NavLink
+						to='/reports'
+						onClick={closeMenu}
+						className={({ isActive }) => (isActive ? 'active-link' : '')}
+					>
+						Отчеты
+					</NavLink>
 				</li>
 
 				<li>
@@ -28,6 +73,7 @@ const Navigation = () => {
 				</li>
 			</ul>
 
+			{/* Профиль */}
 			<div className='navigation__profile'>
 				<Link to='/profile' className='navigation__profile-link'>
 					<img src={profileImage} alt='Аватар пользователя' />
