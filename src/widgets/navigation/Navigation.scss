@@ -1,0 +1,89 @@
+@use '@shared/assets/styles/variables.scss' as *;
+
+.navigation {
+	display: flex;
+	justify-content: space-between;
+	padding-block: 30px;
+	border-bottom: 1px solid $color-gray-2;
+
+	&__menu {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		color: $color-gray-4;
+
+		&__logo {
+			height: 30px;
+			width: 30px;
+			border-radius: 50%;
+			background-color: $color-gray-4;
+		}
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+
+		li:nth-child(3) {
+			margin-right: 35px;
+		}
+
+		img {
+			height: 5px;
+		}
+	}
+
+	&__profile {
+		display: flex;
+		align-items: center;
+		gap: 28px;
+
+		&-link {
+			position: relative;
+
+			img {
+				height: 36px;
+			}
+
+			span {
+				position: absolute;
+				bottom: -5px;
+				right: -8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 20px;
+				height: 20px;
+				font-size: 13px;
+				font-weight: 600;
+				color: $color-white;
+				background-color: $color-red;
+				border-radius: 50%;
+			}
+		}
+	}
+
+	button {
+		display: flex;
+		align-items: center;
+		padding: 10px 20px;
+		gap: 6px;
+		color: $color-black;
+		border: 1px solid $color-gray-2;
+		border-radius: 4px;
+		background-color: $color-gray-1;
+
+		img {
+			height: 18px;
+		}
+	}
+}
+
+@media (max-width: 620px) {
+	.navigation {
+		button {
+			display: none;
+		}
+	}
+}
