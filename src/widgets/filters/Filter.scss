@@ -1,0 +1,90 @@
+@use '@shared/assets/styles/variables.scss' as *;
+
+.filters {
+	padding: 20px 0;
+	border-top: 1px solid $color-gray-2;
+	border-bottom: 1px solid $color-gray-2;
+
+	&__actions {
+		display: flex;
+		gap: 12px;
+
+		button {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 8px;
+			border-radius: 4px;
+
+			img {
+				height: 15px;
+			}
+
+			span {
+				white-space: nowrap;
+			}
+		}
+
+		&__search {
+			display: flex;
+			position: relative;
+			align-items: center;
+			width: 100%;
+
+			img {
+				position: absolute;
+				left: 12px;
+				height: 17px;
+			}
+
+			input {
+				padding: 8px 0 8px 46px;
+				width: 100%;
+				border: 1px solid $color-gray-2;
+				border-radius: 4px;
+
+				&::placeholder {
+					color: $color-gray-4;
+					opacity: 1;
+				}
+			}
+		}
+
+		&__export {
+			border: 1px solid $color-gray-2;
+			background-color: $color-gray-1;
+			flex-shrink: 0;
+		}
+
+		&__create {
+			color: $color-white;
+			border: 1px solid $color-black;
+			background-color: $color-black;
+			flex-shrink: 0;
+		}
+	}
+
+	&__tabs {
+		padding: 20px 0 0 40px;
+
+		ul {
+			display: flex;
+			gap: 10px;
+			overflow-x: auto;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+
+			&::-webkit-scrollbar {
+				width: 0;
+				display: none;
+			}
+
+			li {
+				padding: 8px 16px;
+				background-color: $color-gray-1;
+				border-radius: 4px;
+				white-space: nowrap;
+			}
+		}
+	}
+}
