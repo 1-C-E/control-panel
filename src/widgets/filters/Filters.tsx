@@ -1,21 +1,12 @@
 import './Filter.scss'
 
-import createIcon from '/src/shared/assets/icons/create.svg'
-import exportIcon from '/src/shared/assets/icons/export.svg'
-import searchIcon from '/src/shared/assets/icons/search.svg'
+import createIcon from '@shared/assets/icons/create.svg'
+import exportIcon from '@shared/assets/icons/export.svg'
+import searchIcon from '@shared/assets/icons/search.svg'
 
-import {
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	useDisclosure,
-} from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
-import { Button } from '@chakra-ui/react'
+import { CreateRequestModal } from '../create-request-modal'
 
 const Filters = () => {
 	const filterTabs = [
@@ -73,19 +64,7 @@ const Filters = () => {
 				</ul>
 			</section>
 
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalHeader>Создание заявки</ModalHeader>
-					<ModalCloseButton />
-					<ModalBody></ModalBody>
-
-					<ModalFooter>
-						<Button>Создать заявку</Button>
-						<Button onClick={onClose}>Отмена</Button>
-					</ModalFooter>
-				</ModalContent>
-			</Modal>
+			<CreateRequestModal isOpen={isOpen} onClose={onClose} />
 		</div>
 	)
 }
