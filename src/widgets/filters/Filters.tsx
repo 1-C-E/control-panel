@@ -4,6 +4,19 @@ import createIcon from '/src/shared/assets/icons/create.svg'
 import exportIcon from '/src/shared/assets/icons/export.svg'
 import searchIcon from '/src/shared/assets/icons/search.svg'
 
+import {
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	useDisclosure,
+} from '@chakra-ui/react'
+
+import { Button } from '@chakra-ui/react'
+
 const Filters = () => {
 	const filterTabs = [
 		'Новые',
@@ -15,6 +28,8 @@ const Filters = () => {
 		'Закрыты',
 		'Все статусы',
 	] as const
+
+	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	return (
 		<div className='filters'>
@@ -33,7 +48,7 @@ const Filters = () => {
 					<span>Экспорт</span>
 				</button>
 
-				<button className='filters__actions__create'>
+				<button onClick={onOpen} className='filters__actions__create'>
 					<img src={createIcon} />
 					<span>Создать новую заявку</span>
 				</button>
@@ -57,6 +72,20 @@ const Filters = () => {
 					))}
 				</ul>
 			</section>
+
+			<Modal isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Создание заявки</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody></ModalBody>
+
+					<ModalFooter>
+						<Button>Создать заявку</Button>
+						<Button onClick={onClose}>Отмена</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
 		</div>
 	)
 }
