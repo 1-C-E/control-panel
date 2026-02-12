@@ -62,7 +62,6 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 			photos,
 		})
 
-		// Reset form
 		setSelectedPharmacy('')
 		setSelectedCategory('')
 		setIsWarranty(false)

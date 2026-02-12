@@ -1,4 +1,4 @@
-import './Filter.scss'
+import './Filters.scss'
 
 import createIcon from '@shared/assets/icons/create.svg'
 import exportIcon from '@shared/assets/icons/export.svg'

@@ -31,6 +31,9 @@ const MyTable = () => {
 							<Th>Приоритет</Th>
 							<Th>Тема</Th>
 							<Th>Категория</Th>
+							<Th>Техник</Th>
+							<Th>Реакция</Th>
+							<Th>Решение</Th>
 							<Th>Статус</Th>
 						</Tr>
 					</Thead>
@@ -60,6 +63,9 @@ const MyTable = () => {
 									</Td>
 									<Td>{request.topic}</Td>
 									<Td>{request.category.name}</Td>
+									<Td>{request.technician}</Td>
+									<Td>{request.reaction}</Td>
+									<Td>{request.decision}</Td>
 									<Td>{request.status}</Td>
 								</Tr>
 							)

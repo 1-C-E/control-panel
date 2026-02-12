@@ -12,7 +12,7 @@ export type Category = {
 
 export type Priority = 'Низкий' | 'Высокий'
 
-export type RequestStatus = 'Новая'
+export type RequestStatus = 'Новая' | 'В работе' | 'Готово' | 'Закрыто'
 
 export type Request = {
 	id: string
@@ -22,6 +22,9 @@ export type Request = {
 	priority: Priority
 	topic: string
 	category: Category
+	technician: string
+	reaction: string
+	decision: string
 	status: RequestStatus
 	isWarranty: boolean
 	description: string

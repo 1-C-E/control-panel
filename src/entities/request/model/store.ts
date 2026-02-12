@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { mockCategories, mockPharmacies } from './mockData'
 import type { CreateRequestDTO, Request } from './types'
 
+// Тип нашего store
 type RequestsStore = {
 	requests: Request[]
 	pharmacies: typeof mockPharmacies
@@ -9,6 +10,7 @@ type RequestsStore = {
 	addRequest: (data: CreateRequestDTO) => void
 }
 
+// Генерируем уникальный номер заявки
 const generateRequestNumber = (
 	categoryPrefix: string,
 	existingRequests: Request[],
@@ -20,6 +22,7 @@ const generateRequestNumber = (
 	return `${categoryPrefix}-${nextNumber}`
 }
 
+// Форматируем текущую дату
 const formatDate = (): string => {
 	const date = new Date()
 	const day = date.getDate().toString().padStart(2, '0')
@@ -28,6 +31,7 @@ const formatDate = (): string => {
 	return `${day}.${month}.${year}`
 }
 
+// Форматируем текущее время
 const formatTime = (): string => {
 	const date = new Date()
 	const hours = date.getHours().toString().padStart(2, '0')
@@ -37,16 +41,20 @@ const formatTime = (): string => {
 }
 
 export const useRequestsStore = create<RequestsStore>(set => ({
+	// Начальное состояние - две тестовые заявки
 	requests: [
 		{
-			id: '1',
+			id: '3',
 			number: 'КС-001',
-			pharmacy: mockPharmacies[0],
-			createdAt: '20.07.2025 12:35:45',
+			pharmacy: mockPharmacies[2],
+			createdAt: '22.07.2025 12:35:45',
 			priority: 'Высокий',
 			topic: 'Поломка кассы',
-			category: mockCategories[0],
-			status: 'Новая',
+			category: mockCategories[2],
+			technician: 'Федоровский Н.',
+			reaction: '05:01',
+			decision: '01:35:34',
+			status: 'В работе',
 			isWarranty: false,
 			description: '',
 			photos: [],
@@ -55,11 +63,30 @@ export const useRequestsStore = create<RequestsStore>(set => ({
 			id: '2',
 			number: 'ХЛ-001',
 			pharmacy: mockPharmacies[1],
-			createdAt: '21.08.2025 13:35:45',
+			createdAt: '21.08.2025 15:35:45',
 			priority: 'Низкий',
 			topic: 'Холодильник сильно гудит',
 			category: mockCategories[1],
-			status: 'Новая',
+			technician: 'Максимов П.',
+			reaction: '04:38',
+			decision: '02:46:17',
+			status: 'Готово',
+			isWarranty: false,
+			description: '',
+			photos: [],
+		},
+		{
+			id: '1',
+			number: 'ХЛ-001',
+			pharmacy: mockPharmacies[0],
+			createdAt: '21.08.2025 13:30:41',
+			priority: 'Низкий',
+			topic: 'Холодильник сильно гудит',
+			category: mockCategories[0],
+			technician: 'Алексеев М.',
+			reaction: '06:10',
+			decision: '02:48:10',
+			status: 'Закрыто',
 			isWarranty: false,
 			description: '',
 			photos: [],
@@ -67,6 +94,8 @@ export const useRequestsStore = create<RequestsStore>(set => ({
 	],
 	pharmacies: mockPharmacies,
 	categories: mockCategories,
+
+	// Функция добавления новой заявки
 	addRequest: data =>
 		set(state => {
 			const category = state.categories.find(c => c.id === data.categoryId)!
@@ -85,6 +114,9 @@ export const useRequestsStore = create<RequestsStore>(set => ({
 				priority: data.priority,
 				topic: data.topic,
 				category,
+				technician: '-',
+				reaction: '-',
+				decision: '-',
 				status: 'Новая',
 				isWarranty: data.isWarranty,
 				description: data.description,
@@ -92,7 +124,7 @@ export const useRequestsStore = create<RequestsStore>(set => ({
 			}
 
 			return {
-				requests: [...state.requests, newRequest],
+				requests: [newRequest, ...state.requests],
 			}
 		}),
 }))
