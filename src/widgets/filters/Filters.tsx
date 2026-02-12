@@ -5,11 +5,15 @@ import exportIcon from '@shared/assets/icons/export.svg'
 import searchIcon from '@shared/assets/icons/search.svg'
 
 import { useDisclosure } from '@chakra-ui/react'
+import {
+	useRequestsStore,
+	type FilterType,
+} from '@entities/request/model/store'
 
 import { CreateRequestModal } from '../create-request-modal'
 
 const Filters = () => {
-	const filterTabs = [
+	const filterTabs: FilterType[] = [
 		'Новые',
 		'Отклонены',
 		'На рассмотрении',
@@ -18,9 +22,10 @@ const Filters = () => {
 		'Готовы',
 		'Закрыты',
 		'Все статусы',
-	] as const
+	]
 
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { activeFilter, setActiveFilter } = useRequestsStore()
 
 	return (
 		<div className='filters'>
@@ -35,12 +40,12 @@ const Filters = () => {
 				</div>
 
 				<button className='filters__actions__export'>
-					<img src={exportIcon} />
+					<img src={exportIcon} alt='' />
 					<span>Экспорт</span>
 				</button>
 
 				<button onClick={onOpen} className='filters__actions__create'>
-					<img src={createIcon} />
+					<img src={createIcon} alt='' />
 					<span>Создать новую заявку</span>
 				</button>
 			</section>
@@ -52,10 +57,11 @@ const Filters = () => {
 							<button
 								type='button'
 								role='tab'
-								aria-selected={index === 0}
-								tabIndex={index === 0 ? 0 : -1}
+								aria-selected={activeFilter === tab}
+								tabIndex={activeFilter === tab ? 0 : -1}
 								id={`tab-${index + 1}`}
 								aria-controls={`panel-${index + 1}`}
+								onClick={() => setActiveFilter(tab)}
 							>
 								{tab}
 							</button>

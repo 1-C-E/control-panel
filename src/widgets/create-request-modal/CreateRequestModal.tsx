@@ -25,8 +25,10 @@ import type { Category, Pharmacy, Priority } from '@entities/request'
 import { useRef, useState, type FC } from 'react'
 
 import { useRequestsStore } from '@entities/request'
+import criticalPriorityIcon from '@shared/assets/icons/critical-priority.svg'
 import highPriorityIcon from '@shared/assets/icons/high-priority.svg'
 import lowPriorityIcon from '@shared/assets/icons/low-priority.svg'
+import mediumPriorityIcon from '@shared/assets/icons/medium-priority.svg'
 
 type CreateRequestModalProps = {
 	isOpen: boolean
@@ -92,8 +94,19 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 		setPhotoPreviews(prev => prev.filter((_, i) => i !== index))
 	}
 
-	const getPriorityIcon = (priorityValue: Priority) => {
-		return priorityValue === 'Высокий' ? highPriorityIcon : lowPriorityIcon
+	const getPriorityIcon = (priority: string) => {
+		switch (priority) {
+			case 'Критич.':
+				return criticalPriorityIcon
+			case 'Высокий':
+				return highPriorityIcon
+			case 'Средний':
+				return mediumPriorityIcon
+			case 'Низкий':
+				return lowPriorityIcon
+			default:
+				return lowPriorityIcon
+		}
 	}
 
 	return (
@@ -159,7 +172,9 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 								onChange={e => setPriority(e.target.value as Priority)}
 							>
 								<option value='Низкий'>Низкий</option>
+								<option value='Средний'>Средний</option>
 								<option value='Высокий'>Высокий</option>
+								<option value='Критич.'>Критический</option>
 							</Select>
 							<HStack mt={2}>
 								<Image src={getPriorityIcon(priority)} boxSize='20px' />

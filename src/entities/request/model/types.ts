@@ -10,7 +10,7 @@ export type Category = {
 	prefix: string
 }
 
-export type Priority = 'Низкий' | 'Высокий'
+export type Priority = 'Низкий' | 'Средний' | 'Высокий' | 'Критич.'
 
 export type RequestStatus = 'Новая' | 'В работе' | 'Готово' | 'Закрыто'
 
@@ -24,7 +24,9 @@ export type Request = {
 	category: Category
 	technician: string
 	reaction: string
+	reactionIcon?: string
 	decision: string
+	decisionIcon?: string
 	status: RequestStatus
 	isWarranty: boolean
 	description: string
