@@ -2,8 +2,8 @@
 
 .filters {
 	padding: 20px 0;
-	border-top: 1px solid $color-gray-2;
 	border-bottom: 1px solid $color-gray-2;
+	margin-bottom: 30px;
 
 	&__actions {
 		display: flex;
@@ -65,8 +65,7 @@
 	}
 
 	&__tabs {
-		padding: 20px 0 0 40px;
-
+		margin-top: 20px;
 		ul {
 			display: flex;
 			gap: 10px;

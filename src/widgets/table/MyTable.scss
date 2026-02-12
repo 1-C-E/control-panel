@@ -1,0 +1,56 @@
+@use '@shared/assets/styles/variables.scss' as *;
+// MyTable.scss
+
+.my-table {
+	font-size: 14px;
+	border-radius: 8px 8px 0 0;
+
+	&__header {
+		background: $color-gray-1;
+	}
+
+	&__cell {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		&__pharmacy-number {
+			padding: 1px 4px;
+			font-size: 12px;
+			font-weight: 600;
+			border-radius: 4px;
+			background-color: $color-gray-1;
+		}
+
+		&__time {
+			color: $color-gray-3;
+		}
+
+		&__priority {
+			font-size: 12px;
+			font-weight: 500;
+			color: $color-gray-6;
+		}
+	}
+}
+
+.my-table__cell__status {
+	padding: 2px 6px;
+	border-radius: 4px;
+
+	&.-new {
+		background-color: $color-pink;
+	}
+
+	&.-in-progress {
+		background-color: $color-yellow;
+	}
+
+	&.-done {
+		background-color: $color-green;
+	}
+
+	&.-closed {
+		background-color: $color-gray-1;
+	}
+}

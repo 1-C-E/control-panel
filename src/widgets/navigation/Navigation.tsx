@@ -19,73 +19,75 @@ const Navigation = () => {
 	}
 
 	return (
-		<nav className='navigation container-1840'>
-			{/* Бургер меню для мобильной версии */}
-			{!isMenuOpen && (
-				<button
-					className='navigation__burger'
-					onClick={toggleMenu}
-					aria-label='Открыть меню'
+		<div className='container-1840'>
+			<nav className='navigation'>
+				{/* Бургер меню для мобильной версии */}
+				{!isMenuOpen && (
+					<button
+						className='navigation__burger'
+						onClick={toggleMenu}
+						aria-label='Открыть меню'
+					>
+						<img src={menuIcon} alt='Меню' />
+					</button>
+				)}
+
+				{/* Затемнение фона при открытом меню */}
+				{isMenuOpen && (
+					<div className='navigation__overlay' onClick={closeMenu} />
+				)}
+
+				{/* Основное меню */}
+				<ul
+					className={`navigation__menu ${isMenuOpen ? 'navigation__menu--open' : ''}`}
 				>
-					<img src={menuIcon} alt='Меню' />
-				</button>
-			)}
+					{/* Предполагаю что должен быть логотип */}
+					<li>
+						<Link to='/' onClick={closeMenu}>
+							<div className='navigation__menu__logo'></div>
+						</Link>
+					</li>
 
-			{/* Затемнение фона при открытом меню */}
-			{isMenuOpen && (
-				<div className='navigation__overlay' onClick={closeMenu} />
-			)}
+					<li>
+						<NavLink
+							to='/requests'
+							onClick={closeMenu}
+							className={({ isActive }) => (isActive ? 'active-link' : '')}
+						>
+							Заявки
+						</NavLink>
+					</li>
 
-			{/* Основное меню */}
-			<ul
-				className={`navigation__menu ${isMenuOpen ? 'navigation__menu--open' : ''}`}
-			>
-				{/* Предполагаю что должен быть логотип */}
-				<li>
-					<Link to='/' onClick={closeMenu}>
-						<div className='navigation__menu__logo'></div>
+					<li>
+						<NavLink
+							to='/reports'
+							onClick={closeMenu}
+							className={({ isActive }) => (isActive ? 'active-link' : '')}
+						>
+							Отчеты
+						</NavLink>
+					</li>
+
+					<li>
+						<span>Справочники</span>
+						<img src={arrowIcon} alt='Раскрыть раздел' />
+					</li>
+				</ul>
+
+				{/* Профиль */}
+				<div className='navigation__profile'>
+					<Link to='/profile' className='navigation__profile-link'>
+						<img src={profileImage} alt='Аватар пользователя' />
+						<span>2</span>
 					</Link>
-				</li>
 
-				<li>
-					<NavLink
-						to='/requests'
-						onClick={closeMenu}
-						className={({ isActive }) => (isActive ? 'active-link' : '')}
-					>
-						Заявки
-					</NavLink>
-				</li>
-
-				<li>
-					<NavLink
-						to='/reports'
-						onClick={closeMenu}
-						className={({ isActive }) => (isActive ? 'active-link' : '')}
-					>
-						Отчеты
-					</NavLink>
-				</li>
-
-				<li>
-					<span>Справочники</span>
-					<img src={arrowIcon} alt='Раскрыть раздел' />
-				</li>
-			</ul>
-
-			{/* Профиль */}
-			<div className='navigation__profile'>
-				<Link to='/profile' className='navigation__profile-link'>
-					<img src={profileImage} alt='Аватар пользователя' />
-					<span>2</span>
-				</Link>
-
-				<button>
-					<img src={exitIcon} alt='' />
-					<span>Выйти</span>
-				</button>
-			</div>
-		</nav>
+					<button>
+						<img src={exitIcon} alt='' />
+						<span>Выйти</span>
+					</button>
+				</div>
+			</nav>
+		</div>
 	)
 }
 

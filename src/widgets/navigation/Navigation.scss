@@ -5,12 +5,13 @@
 	justify-content: space-between;
 	padding-block: 30px;
 	position: relative;
+	border-bottom: 1px solid $color-gray-2;
 
 	.active-link {
 		color: $color-black;
 	}
 
-	/* Бургер-меню */
+	// Бургер-меню
 	&__burger {
 		display: none;
 		background: none;
@@ -25,7 +26,7 @@
 		}
 	}
 
-	/* Затемнение фона */
+	// Затемнение фона
 	&__overlay {
 		display: none;
 		position: fixed;
@@ -112,7 +113,7 @@
 	}
 }
 
-/* Мобильная версия - до 480px */
+// Мобильная версия - до 480px
 @media (max-width: 480px) {
 	.navigation {
 		padding-block: 20px;
@@ -130,7 +131,7 @@
 			display: block;
 		}
 
-		/* Выезжающее меню */
+		// Выезжающее меню
 		&__menu {
 			position: fixed;
 			top: 0;
@@ -147,7 +148,7 @@
 			overflow-y: auto;
 			margin-top: 0;
 
-			/* Стили для обычных элементов меню в мобильной версии */
+			// Стили для обычных элементов меню в мобильной версии
 			li:not(.navigation__menu-logo-mobile) {
 				width: 100%;
 				padding: 16px 0;
@@ -163,12 +164,12 @@
 				margin-right: 0;
 			}
 
-			/* Состояние открытого меню */
+			// Состояние открытого меню
 			&--open {
 				transform: translateX(280px);
 			}
 
-			/* Стили для ссылок в мобильном меню */
+			// Стили для ссылок в мобильном меню
 			a {
 				display: flex;
 				align-items: center;
