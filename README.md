@@ -1,4 +1,4 @@
-##Основной тек:
+## Основной тек:
 React
 Vite
 TypeScript
