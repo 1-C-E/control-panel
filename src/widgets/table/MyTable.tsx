@@ -72,7 +72,9 @@ const MyTable = () => {
 											<span className='my-table__cell__pharmacy__number'>
 												{request.pharmacy.number}
 											</span>
-											<span>{request.pharmacy.address}</span>
+											<span className='my-table__cell__pharmacy__address'>
+												{request.pharmacy.address}
+											</span>
 										</div>
 									</Td>
 									<Td
@@ -93,10 +95,11 @@ const MyTable = () => {
 									>
 										<div className='cell-container'>
 											<img
+												className='my-table__cell__priority__icon'
 												src={getPriorityIcon(request.priority)}
 												alt={request.priority}
 											/>
-											<span className='my-table__cell__priority'>
+											<span className='my-table__cell__priority__level'>
 												{request.priority}
 											</span>
 										</div>

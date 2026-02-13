@@ -105,9 +105,21 @@
 			border: 1px solid $color-gray-2;
 			border-radius: 4px;
 			background-color: $color-gray-1;
+			transition: all 0.4s ease;
 
 			img {
 				height: 18px;
+				transition: all 0.4s ease;
+				filter: brightness(0);
+			}
+
+			&:hover {
+				color: $color-white;
+				background-color: $color-red;
+
+				img {
+					filter: brightness(0) invert(1);
+				}
 			}
 		}
 	}
