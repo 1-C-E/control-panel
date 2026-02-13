@@ -227,8 +227,12 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 												boxSize='15px'
 												alt='Низкий'
 											/>
-											<Text>Низкий:</Text>
-											<Text>не сильно влияет на эффективность</Text>
+											<Text className='modal__select__priority-level'>
+												Низкий:
+											</Text>
+											<Text className='modal__select__priority-addition'>
+												не сильно влияет на эффективность
+											</Text>
 										</HStack>
 									</MenuItem>
 
@@ -239,8 +243,12 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 												boxSize='15px'
 												alt='Средний'
 											/>
-											<Text>Средний:</Text>
-											<Text>влияет на эффективность, но не стопорит</Text>
+											<Text className='modal__select__priority-level'>
+												Средний:
+											</Text>
+											<Text className='modal__select__priority-addition'>
+												влияет на эффективность, но не стопорит
+											</Text>
 										</HStack>
 									</MenuItem>
 
@@ -251,8 +259,12 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 												boxSize='15px'
 												alt='Высокий'
 											/>
-											<Text>Высокий:</Text>
-											<Text>сильно влияет на эффективность</Text>
+											<Text className='modal__select__priority-level'>
+												Высокий:
+											</Text>
+											<Text className='modal__select__priority-addition'>
+												сильно влияет на эффективность
+											</Text>
 										</HStack>
 									</MenuItem>
 
@@ -263,8 +275,12 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 												boxSize='15px'
 												alt='Критический'
 											/>
-											<Text>Критический:</Text>
-											<Text>останавливает все процессы</Text>
+											<Text className='modal__select__priority-level'>
+												Критический:
+											</Text>
+											<Text className='modal__select__priority-addition'>
+												останавливает все процессы
+											</Text>
 										</HStack>
 									</MenuItem>
 								</MenuList>
