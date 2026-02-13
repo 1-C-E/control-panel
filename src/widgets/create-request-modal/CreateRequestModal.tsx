@@ -9,6 +9,10 @@ import {
 	IconButton,
 	Image,
 	Input,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
@@ -21,12 +25,15 @@ import {
 	Textarea,
 	VStack,
 } from '@chakra-ui/react'
+
 import type { Category, Pharmacy, Priority } from '@entities/request'
 import { useRef, useState, type FC } from 'react'
+import './CreateRequestModal.scss'
 
 import { useRequestsStore } from '@entities/request'
 import criticalPriorityIcon from '@shared/assets/icons/critical-priority.svg'
 import highPriorityIcon from '@shared/assets/icons/high-priority.svg'
+import imageIcon from '@shared/assets/icons/image.svg'
 import lowPriorityIcon from '@shared/assets/icons/low-priority.svg'
 import mediumPriorityIcon from '@shared/assets/icons/medium-priority.svg'
 
@@ -109,18 +116,43 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 		}
 	}
 
+	const getPriorityDisplayName = (priority: string) => {
+		switch (priority) {
+			case 'Критич.':
+				return 'Критический'
+			default:
+				return priority
+		}
+	}
+
+	const getPriorityDescription = (priority: string) => {
+		switch (priority) {
+			case 'Низкий':
+				return 'не сильно влияет на эффективность'
+			case 'Средний':
+				return 'влияет на эффективность, но не стопорит'
+			case 'Высокий':
+				return 'сильно влияет на эффективность'
+			case 'Критич.':
+				return 'останавливает все процессы'
+			default:
+				return ''
+		}
+	}
+
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size='xl'>
+		<Modal isOpen={isOpen} onClose={onClose} size='5xl'>
 			<ModalOverlay />
-			<ModalContent>
-				<ModalHeader>Создание заявки</ModalHeader>
+			<ModalContent className='modal'>
+				<ModalHeader className='modal__title'>Создание заявки</ModalHeader>
 				<ModalCloseButton />
-				<ModalBody>
-					<VStack spacing={4} align='stretch'>
+				<ModalBody className='container' width='100%'>
+					<VStack spacing={10} align='stretch' width='100%'>
 						<FormControl isRequired>
-							<FormLabel>Адрес аптеки</FormLabel>
+							<FormLabel className='modal__label'>Аптека</FormLabel>
 							<Select
-								placeholder='Выберите аптеку'
+								className='modal__select'
+								placeholder='Выберите аптеку от которой исходит заявка'
 								value={selectedPharmacy}
 								onChange={e => setSelectedPharmacy(e.target.value)}
 							>
@@ -132,68 +164,128 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 							</Select>
 						</FormControl>
 
-						<FormControl isRequired>
-							<FormLabel>Категория заявки</FormLabel>
-							<Select
-								placeholder='Выберите категорию'
-								value={selectedCategory}
-								onChange={e => setSelectedCategory(e.target.value)}
-							>
-								{categories.map((category: Category) => (
-									<option key={category.id} value={category.id}>
-										{category.name}
-									</option>
-								))}
-							</Select>
-						</FormControl>
+						<VStack spacing={4} align='stretch' width='100%'>
+							<FormControl isRequired>
+								<FormLabel className='modal__label'>Категория заявки</FormLabel>
+								<Select
+									className='modal__select'
+									placeholder='Выберите категорию'
+									value={selectedCategory}
+									onChange={e => setSelectedCategory(e.target.value)}
+								>
+									{categories.map((category: Category) => (
+										<option key={category.id} value={category.id}>
+											{category.name}
+										</option>
+									))}
+								</Select>
+							</FormControl>
 
-						<FormControl>
-							<Checkbox
-								isChecked={isWarranty}
-								onChange={e => setIsWarranty(e.target.checked)}
-							>
-								Гарантийный случай?
-							</Checkbox>
-						</FormControl>
+							<FormControl>
+								<Checkbox
+									className='modal__checkbox'
+									isChecked={isWarranty}
+									onChange={e => setIsWarranty(e.target.checked)}
+								>
+									Гарантийный случай?
+								</Checkbox>
+							</FormControl>
+						</VStack>
+					</VStack>
 
+					<VStack spacing={8} align='stretch' width='100%'>
 						<FormControl isRequired>
-							<FormLabel>Тема заявки</FormLabel>
-							<Input
+							<FormLabel className='modal__label'>Тема заявки</FormLabel>
+							<Textarea
+								className='modal__select'
 								value={topic}
 								onChange={e => setTopic(e.target.value)}
-								placeholder='Введите тему'
+								placeholder='Дайте заявке краткое название: например, сломался холодильник или не работает кондиционер'
 							/>
 						</FormControl>
 
 						<FormControl isRequired>
-							<FormLabel>Приоритет</FormLabel>
-							<Select
-								value={priority}
-								onChange={e => setPriority(e.target.value as Priority)}
-							>
-								<option value='Низкий'>Низкий</option>
-								<option value='Средний'>Средний</option>
-								<option value='Высокий'>Высокий</option>
-								<option value='Критич.'>Критический</option>
-							</Select>
-							<HStack mt={2}>
-								<Image src={getPriorityIcon(priority)} boxSize='20px' />
-								<Text>{priority}</Text>
-							</HStack>
+							<FormLabel className='modal__label'>Приоритет</FormLabel>
+							<Menu>
+								<MenuButton as={Button} className='modal__select'>
+									<HStack spacing={2}>
+										<Image src={getPriorityIcon(priority)} alt={priority} />
+										<Text className='modal__select__priority-level'>
+											{getPriorityDisplayName(priority)}
+										</Text>
+										<Text className='modal__select__priority-addition'>
+											— {getPriorityDescription(priority)}
+										</Text>
+									</HStack>
+								</MenuButton>
+
+								<MenuList>
+									<MenuItem onClick={() => setPriority('Низкий')}>
+										<HStack spacing={3} width='100%'>
+											<Image
+												src={getPriorityIcon('Низкий')}
+												boxSize='15px'
+												alt='Низкий'
+											/>
+											<Text>Низкий:</Text>
+											<Text>не сильно влияет на эффективность</Text>
+										</HStack>
+									</MenuItem>
+
+									<MenuItem onClick={() => setPriority('Средний')}>
+										<HStack spacing={3} width='100%'>
+											<Image
+												src={getPriorityIcon('Средний')}
+												boxSize='15px'
+												alt='Средний'
+											/>
+											<Text>Средний:</Text>
+											<Text>влияет на эффективность, но не стопорит</Text>
+										</HStack>
+									</MenuItem>
+
+									<MenuItem onClick={() => setPriority('Высокий')}>
+										<HStack spacing={3} width='100%'>
+											<Image
+												src={getPriorityIcon('Высокий')}
+												boxSize='15px'
+												alt='Высокий'
+											/>
+											<Text>Высокий:</Text>
+											<Text>сильно влияет на эффективность</Text>
+										</HStack>
+									</MenuItem>
+
+									<MenuItem onClick={() => setPriority('Критич.')}>
+										<HStack spacing={3} width='100%'>
+											<Image
+												src={getPriorityIcon('Критич.')}
+												boxSize='15px'
+												alt='Критический'
+											/>
+											<Text>Критический:</Text>
+											<Text>останавливает все процессы</Text>
+										</HStack>
+									</MenuItem>
+								</MenuList>
+							</Menu>
 						</FormControl>
 
 						<FormControl>
-							<FormLabel>Описание проблемы</FormLabel>
+							<FormLabel className='modal__label'>Описание проблемы</FormLabel>
 							<Textarea
+								className='modal__select'
 								value={description}
 								onChange={e => setDescription(e.target.value)}
-								placeholder='Опишите проблему'
+								placeholder={
+									'Кратко опишите проблему:\n\n- что случилось?\n- дата и время произошедшего?\n- сколько длится проблема?\n- насколько она влияет на вашу работу?'
+								}
 								rows={4}
 							/>
 						</FormControl>
 
 						<FormControl>
-							<FormLabel>Прикрепите фото</FormLabel>
+							<FormLabel className='modal__label'>Прикрепите файл</FormLabel>
 							<Input
 								type='file'
 								multiple
@@ -202,16 +294,25 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 								ref={fileInputRef}
 								display='none'
 							/>
-							<Button onClick={() => fileInputRef.current?.click()}>
-								Выбрать файлы
-							</Button>
+							<button
+								onClick={() => fileInputRef.current?.click()}
+								className='modal__select__photo'
+							>
+								<Text>Выберите или перетащите фото или файл</Text>
+								<Image src={imageIcon} alt='Загрузить' boxSize='20px' />
+							</button>
 
 							{photoPreviews.length > 0 && (
 								<Box mt={4}>
 									<VStack align='stretch'>
 										{photoPreviews.map((preview, index) => (
 											<HStack key={index} justifyContent='space-between'>
-												<Image src={preview} boxSize='50px' objectFit='cover' />
+												<Image
+													src={preview}
+													boxSize='50px'
+													objectFit='cover'
+													alt={`Preview ${index + 1}`}
+												/>
 												<Text>{photos[index]?.name}</Text>
 												<IconButton
 													aria-label='Удалить фото'
@@ -228,16 +329,17 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 					</VStack>
 				</ModalBody>
 
-				<ModalFooter>
-					<Button
-						colorScheme='blue'
-						mr={3}
+				<ModalFooter className='modal__footer'>
+					<button
 						onClick={handleSubmit}
-						isDisabled={!selectedPharmacy || !selectedCategory || !topic}
+						className='modal__footer__create-btn'
+						disabled={!selectedPharmacy || !selectedCategory || !topic}
 					>
 						Создать заявку
-					</Button>
-					<Button onClick={onClose}>Отмена</Button>
+					</button>
+					<button onClick={onClose} className='modal__footer__cancel-btn '>
+						Отмена
+					</button>
 				</ModalFooter>
 			</ModalContent>
 		</Modal>

@@ -10,9 +10,11 @@ import {
 	type FilterType,
 } from '@entities/request/model/store'
 
+import { useWindowWidth } from '@shared/hooks/useWindowWidth'
 import { CreateRequestModal } from '../create-request-modal'
 
 const Filters = () => {
+	const width = useWindowWidth()
 	const filterTabs: FilterType[] = [
 		'Новые',
 		'Отклонены',
@@ -27,6 +29,10 @@ const Filters = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { activeFilter, setActiveFilter } = useRequestsStore()
 
+	const getPlaceholder = () => {
+		return width <= 630 ? 'Поиск' : 'Поиск по номеру или теме заявки'
+	}
+
 	return (
 		<div className='container-1840'>
 			<div className='filters'>
@@ -35,7 +41,7 @@ const Filters = () => {
 						<img src={searchIcon} alt='' />
 						<input
 							type='text'
-							placeholder='Поиск по номеру или теме заявки'
+							placeholder={getPlaceholder()}
 							aria-label='Поиск заявок'
 						/>
 					</div>
@@ -54,7 +60,7 @@ const Filters = () => {
 				<section className='filters__tabs'>
 					<ul>
 						{filterTabs.map((tab, index) => (
-							<li key={tab} className='filters__status-item'>
+							<li key={tab}>
 								<button
 									type='button'
 									role='tab'

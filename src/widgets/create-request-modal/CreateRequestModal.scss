@@ -1,0 +1,83 @@
+@use '@shared/assets/styles/variables.scss' as *;
+
+.container {
+	display: flex;
+	gap: 40px;
+}
+
+.modal {
+	padding: 15px;
+	border-radius: 15px !important;
+
+	&__label {
+		font-size: 12px !important;
+	}
+
+	&__title {
+		font-size: 24px !important;
+		font-weight: 500 !important;
+	}
+
+	&__select {
+		max-height: 170px;
+		height: 145px;
+		width: 100%;
+		font-size: 14px !important;
+		border: 1px solid $color-gray-4 !important;
+		border-radius: 8px !important;
+
+		background-color: transparent !important;
+
+		&::placeholder {
+			color: $color-gray-4 !important;
+		}
+
+		&__priority-level {
+			font-size: 12px;
+			font-weight: 500;
+			color: $color-black;
+		}
+		&__priority-addition {
+			font-size: 12px;
+			font-weight: 400;
+			color: $color-gray-4;
+		}
+	}
+
+	&__checkbox {
+		font-size: 14px !important;
+	}
+
+	&__select__photo {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		align-items: center;
+		padding: 40px 0;
+		width: 100%;
+		font-size: 14px !important;
+		font-weight: 300 !important;
+		border: 1px dashed $color-gray-4;
+		border-radius: 8px !important;
+		background-color: transparent !important;
+	}
+
+	&__footer {
+		display: flex;
+		margin-right: auto;
+		gap: 16px;
+
+		&__create-btn {
+			padding: 8px 16px;
+			color: $color-white;
+			border-radius: 5px;
+			background-color: $color-black;
+		}
+
+		&__cancel-btn {
+			padding: 8px 16px;
+			border: 1px solid $color-black;
+			border-radius: 5px;
+		}
+	}
+}

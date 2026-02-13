@@ -8,6 +8,7 @@
 	&__actions {
 		display: flex;
 		gap: 12px;
+		margin-bottom: 20px;
 
 		button {
 			display: flex;
@@ -38,7 +39,7 @@
 			}
 
 			input {
-				padding: 8px 0 8px 46px;
+				padding: 8px 0 8px 40px;
 				width: 100%;
 				border: 1px solid $color-gray-2;
 				border-radius: 4px;
@@ -65,7 +66,6 @@
 	}
 
 	&__tabs {
-		margin-top: 20px;
 		ul {
 			display: flex;
 			gap: 10px;
@@ -84,6 +84,47 @@
 				border-radius: 4px;
 				white-space: nowrap;
 			}
+		}
+	}
+}
+
+@media (max-width: 750px) {
+	.filters {
+		&__actions {
+			&__export {
+				display: none !important;
+			}
+		}
+	}
+}
+
+@media (max-width: 630px) {
+	.filters__actions {
+		margin-bottom: 0px;
+
+		&__search {
+			position: fixed;
+			bottom: 80px;
+			right: 16px;
+			width: 110px;
+
+			input {
+				border: 2px solid $color-black;
+			}
+		}
+
+		&__create {
+			position: fixed;
+			bottom: 30px;
+			right: 16px;
+		}
+	}
+
+	.filters__tabs {
+		font-size: 14px;
+
+		li {
+			padding: 4px 12px;
 		}
 	}
 }
