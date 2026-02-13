@@ -201,6 +201,7 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 								value={topic}
 								onChange={e => setTopic(e.target.value)}
 								placeholder='Дайте заявке краткое название: например, сломался холодильник или не работает кондиционер'
+								maxLength={29}
 							/>
 						</FormControl>
 
