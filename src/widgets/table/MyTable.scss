@@ -3,53 +3,176 @@
 .my-table {
 	font-size: 14px;
 	border-radius: 8px 8px 0 0;
+}
+.my-table__header {
+	background: $color-gray-1;
+}
 
-	&__header {
-		background: $color-gray-1;
+.cell-container {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.my-table__cell {
+	&__pharmacy-number {
+		padding: 1px 4px;
+		font-size: 12px;
+		font-weight: 600;
+		border-radius: 4px;
+		background-color: $color-gray-1;
 	}
 
-	&__cell {
-		display: flex;
-		align-items: center;
-		gap: 5px;
+	&__status {
+		padding: 2px 6px;
+		border-radius: 4px;
 
-		&__pharmacy-number {
-			padding: 1px 4px;
-			font-size: 12px;
-			font-weight: 600;
-			border-radius: 4px;
+		&.-new {
+			background-color: $color-pink;
+		}
+
+		&.-in-progress {
+			background-color: $color-yellow;
+		}
+
+		&.-done {
+			background-color: $color-green;
+		}
+
+		&.-closed {
 			background-color: $color-gray-1;
 		}
+	}
 
-		&__time {
-			color: $color-gray-3;
+	&__created-at__time {
+		color: $color-gray-3;
+	}
+
+	.my-table__priority {
+		font-size: 12px;
+		font-weight: 500;
+		color: $color-gray-6;
+	}
+}
+
+@media (max-width: 1690px) {
+	.my-table__header__technician {
+		display: none;
+	}
+
+	.my-table__cell__technician {
+		display: none;
+	}
+
+	.my-table__cell__pharmacy {
+		&__number {
+			display: none;
 		}
+	}
 
-		&__priority {
-			font-size: 12px;
-			font-weight: 500;
-			color: $color-gray-6;
+	.my-table__cell__created-at {
+		&__time {
+			display: none;
 		}
 	}
 }
 
-.my-table__cell__status {
-	padding: 2px 6px;
-	border-radius: 4px;
-
-	&.-new {
-		background-color: $color-pink;
+@media (max-width: 1430px) {
+	.my-table__header__category {
+		display: none;
 	}
 
-	&.-in-progress {
-		background-color: $color-yellow;
+	.my-table__cell__category {
+		display: none;
+	}
+}
+
+@media (max-width: 1280px) {
+	.my-table__header__created-at {
+		display: none;
 	}
 
-	&.-done {
-		background-color: $color-green;
+	.my-table__cell__created-at {
+		display: none;
 	}
 
-	&.-closed {
-		background-color: $color-gray-1;
+	.my-table__header__reaction {
+		display: none;
+	}
+
+	.my-table__cell__reaction {
+		display: none;
+	}
+}
+
+@media (max-width: 1050px) {
+	.my-table {
+		table,
+		thead,
+		tbody,
+		th,
+		td,
+		tr {
+			display: block;
+		}
+
+		thead {
+			display: none;
+		}
+
+		tbody {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		tr {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 12px;
+			padding: 16px;
+			background: white;
+			border: 1px solid $color-gray-1;
+			border-radius: 8px;
+			margin-bottom: 0;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		td {
+			display: flex;
+			flex-direction: column;
+			border: none;
+			padding: 0;
+			margin: 0;
+			width: 100%;
+		}
+
+		&__cell {
+			&__number {
+				grid-column: 1 / -1;
+				margin-bottom: 4px;
+			}
+
+			&__pharmacy {
+				.cell-container {
+					flex-wrap: wrap;
+				}
+			}
+
+			&__priority {
+				.cell-container {
+					img {
+						flex-shrink: 0;
+					}
+				}
+			}
+
+			&__status {
+				.cell-container {
+					width: 100%;
+				}
+			}
+		}
 	}
 }

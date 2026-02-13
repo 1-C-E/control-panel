@@ -46,16 +46,16 @@ const MyTable = () => {
 				<Table variant='simple'>
 					<Thead>
 						<Tr className='my-table__header'>
-							<Th>№</Th>
-							<Th>Аптека</Th>
-							<Th>Создана</Th>
-							<Th>Приоритет</Th>
-							<Th>Тема</Th>
-							<Th>Категория</Th>
-							<Th>Техник</Th>
-							<Th>Реакция</Th>
-							<Th>Решение</Th>
-							<Th>Статус</Th>
+							<Th className='my-table__header__number'>№</Th>
+							<Th className='my-table__header__pharmacy'>Аптека</Th>
+							<Th className='my-table__header__created-at'>Создана</Th>
+							<Th className='my-table__header__priority'>Приоритет</Th>
+							<Th className='my-table__header__topic'>Тема</Th>
+							<Th className='my-table__header__category'>Категория</Th>
+							<Th className='my-table__header__technician'>Техник</Th>
+							<Th className='my-table__header__reaction'>Реакция</Th>
+							<Th className='my-table__header__decision'>Решение</Th>
+							<Th className='my-table__header__status'>Статус</Th>
 						</Tr>
 					</Thead>
 					<Tbody>
@@ -64,23 +64,34 @@ const MyTable = () => {
 
 							return (
 								<Tr key={request.id}>
-									<Td>{request.number}</Td>
-									<Td>
-										<div className='my-table__cell'>
-											<span className='my-table__cell__pharmacy-number'>
+									<Td className='my-table__cell__number' data-label='№'>
+										{request.number}
+									</Td>
+									<Td className='my-table__cell__pharmacy' data-label='Аптека'>
+										<div className='cell-container'>
+											<span className='my-table__cell__pharmacy__number'>
 												{request.pharmacy.number}
 											</span>
 											<span>{request.pharmacy.address}</span>
 										</div>
 									</Td>
-									<Td>
-										<div className='my-table__cell'>
+									<Td
+										className='my-table__cell__created-at'
+										data-label='Создана'
+									>
+										<div className='cell-container'>
 											<span>{date}</span>
-											<span className='my-table__cell__time'> {time}</span>
+											<span className='my-table__cell__created-at__time'>
+												{' '}
+												{time}
+											</span>
 										</div>
 									</Td>
-									<Td>
-										<div className='my-table__cell'>
+									<Td
+										className='my-table__cell__priority'
+										data-label='Приоритет'
+									>
+										<div className='cell-container'>
 											<img
 												src={getPriorityIcon(request.priority)}
 												alt={request.priority}
@@ -90,11 +101,23 @@ const MyTable = () => {
 											</span>
 										</div>
 									</Td>
-									<Td>{request.topic}</Td>
-									<Td>{request.category.name}</Td>
-									<Td>{request.technician}</Td>
-									<Td>
-										<div className='my-table__cell'>
+									<Td className='my-table__cell__topic' data-label='Тема'>
+										{request.topic}
+									</Td>
+									<Td
+										className='my-table__cell__category'
+										data-label='Категория'
+									>
+										{request.category.name}
+									</Td>
+									<Td
+										className='my-table__cell__technician'
+										data-label='Техник'
+									>
+										{request.technician}
+									</Td>
+									<Td className='my-table__cell__reaction' data-label='Реакция'>
+										<div className='cell-container'>
 											{request.reactionIcon && (
 												<img
 													src={request.reactionIcon}
@@ -104,8 +127,8 @@ const MyTable = () => {
 											{request.reaction}
 										</div>
 									</Td>
-									<Td>
-										<div className='my-table__cell'>
+									<Td className='my-table__cell__decision' data-label='Решение'>
+										<div className='cell-container'>
 											{request.decisionIcon && (
 												<img
 													src={request.decisionIcon}
@@ -115,8 +138,8 @@ const MyTable = () => {
 											{request.decision}
 										</div>
 									</Td>
-									<Td>
-										<div className='my-table__cell'>
+									<Td className='my-table__cell__status' data-label='Статус'>
+										<div className='cell-container'>
 											<span
 												className={`my-table__cell__status ${statusClasses[request.status]}`}
 											>
