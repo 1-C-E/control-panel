@@ -11,9 +11,6 @@ Zustand
 Chakra UI 
 
 
-
-
-
 ## Дополнительный стек:
 
 SCSS
