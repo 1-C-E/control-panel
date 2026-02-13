@@ -145,7 +145,7 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 			<ModalOverlay />
 			<ModalContent className='modal'>
 				<ModalHeader className='modal__title'>Создание заявки</ModalHeader>
-				<ModalCloseButton />
+				<ModalCloseButton className='modal__close' />
 				<ModalBody className='container' width='100%'>
 					<VStack spacing={10} align='stretch' width='100%'>
 						<FormControl isRequired>
@@ -301,7 +301,9 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 						</FormControl>
 
 						<FormControl>
-							<FormLabel className='modal__label'>Прикрепите файл</FormLabel>
+							<FormLabel className='modal__label label-input-img'>
+								Прикрепите файл
+							</FormLabel>
 							<Input
 								type='file'
 								multiple
@@ -312,10 +314,27 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 							/>
 							<button
 								onClick={() => fileInputRef.current?.click()}
-								className='modal__select__photo'
+								className='modal__select__photo-btn'
 							>
-								<Text>Выберите или перетащите фото или файл</Text>
-								<Image src={imageIcon} alt='Загрузить' boxSize='20px' />
+								<Text className='modal__select__photo-desktop-text'>
+									Выберите или перетащите фото или файл
+								</Text>
+								<Image
+									src={imageIcon}
+									alt='Загрузить'
+									boxSize='20px'
+									className='modal__select__photo-desktop-icon'
+								/>
+
+								<Image
+									src='/src/shared/assets/icons/plus.svg'
+									alt='Загрузить'
+									boxSize='12px'
+									className='modal__select__photo-mobile-icon'
+								/>
+								<Text className='modal__select__photo-mobile-text'>
+									Прикрепить файлы
+								</Text>
 							</button>
 
 							{photoPreviews.length > 0 && (
@@ -353,7 +372,7 @@ export const CreateRequestModal: FC<CreateRequestModalProps> = ({
 					>
 						Создать заявку
 					</button>
-					<button onClick={onClose} className='modal__footer__cancel-btn '>
+					<button onClick={onClose} className='modal__footer__cancel-btn'>
 						Отмена
 					</button>
 				</ModalFooter>
